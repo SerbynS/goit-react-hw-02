@@ -5,13 +5,21 @@ import Notification from "../Notification/Notification";
 
 import css from "./App.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
-  const [values, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [values, setFeedback] = useState(() => {
+    const savedValues = window.localStorage.getItem("saved-values");
+
+    if (savedValues !== null) {
+      return JSON.parse(savedValues);
+    }
+
+    return {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
   });
 
   const updateFeedback = (feedbackType) => {
@@ -20,6 +28,10 @@ export default function App() {
       [feedbackType]: prevFeedback[feedbackType] + 1,
     }));
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-values", JSON.stringify(values));
+  }, [values]);
 
   const resetFeedback = () => {
     setFeedback({ good: 0, neutral: 0, bad: 0 });
