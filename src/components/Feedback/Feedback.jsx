@@ -6,10 +6,10 @@ export default function Feedback({
 }) {
   return (
     <>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total: {totalFeedback}</p>
+      <p className={css.values}>Good: {good}</p>
+      <p className={css.values}>Neutral: {neutral}</p>
+      <p className={css.values}>Bad: {bad}</p>
+      <p className={css.values}>Total: {totalFeedback}</p>
       <p>Positive: {Math.round((good / totalFeedback) * 100)}%</p>
     </>
   );

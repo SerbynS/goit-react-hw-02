@@ -21,10 +21,14 @@ export default function App() {
     }));
   };
 
+  const resetFeedback = () => {
+    setFeedback({ good: 0, neutral: 0, bad: 0 });
+  };
+
   const totalFeedback = values.good + values.neutral + values.bad;
 
   return (
-    <>
+    <div className={css.container}>
       <Description
         title="Sip Happens Café"
         content="Please leave your feedback about our service by selecting one of the options below."
@@ -32,6 +36,7 @@ export default function App() {
       <Options
         onLeaveFeedback={updateFeedback}
         totalFeedBack={totalFeedback}
+        onResetFeedback={resetFeedback}
       ></Options>
 
       {totalFeedback > 0 ? (
@@ -39,6 +44,6 @@ export default function App() {
       ) : (
         <Notification></Notification>
       )}
-    </>
+    </div>
   );
 }
